@@ -1,0 +1,170 @@
+:root {
+  --dark: #0f4640;
+  --mid: #63836e;
+  --hilite: #dca497;
+  --red: #b83919;
+  --gray: #f5ebea;
+  --entry-content--font-family: 'Bodoni Moda', 'Old Standard TT', serif;
+  --responsive--aligndefault-width: 80ex;
+}
+
+.entry-title,
+.letter {
+  font-size: 19px;
+}
+
+.letter {
+  position: relative;
+}
+
+.letter .pb {
+  position: absolute;
+  right: -200px;
+  text-align: right;
+  text-decoration: none;
+}
+
+.letter .pb img {
+  display: block;
+}
+
+.letter p {
+  text-align: justify;
+  text-indent: 2rem;
+}
+
+.letter .salute,
+.letter .signed {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.letter .dateline,
+.letter .signed {
+  text-align: right;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.site-footer,
+.site-header,
+.alignwide {
+  max-width: none;
+}
+
+
+.singular .entry-title {
+  font-size: 1.4rem;
+  font-family: var(--entry-content--font-family);
+}
+
+.singular .entry-header {
+  border-bottom: none;
+  padding-top: var(--global--spacing-vertical);
+  padding-bottom: var(--global--spacing-vertical);
+  margin-bottom: 0;
+  padding-left: var(--global--spacing-horizontal);
+  padding-right: var(--global--spacing-horizontal);
+}
+
+.entry-content > * {
+  margin-right: 2rem !important;
+  margin-left: 2rem !important;
+}
+
+#colophon,
+#masthead {
+  background-color: var(--dark);
+  color: #ffffff;
+  padding: 0;
+}
+
+
+
+#colophon a,
+#masthead a,
+#masthead h1,
+.footer-navigation,
+.site-branding {
+  color: #ffffff;
+}
+
+.site-branding {
+  padding: 1rem;
+}
+
+.site-branding form.search {
+  float: right;
+}
+#masthead img.banner {
+  width: 100%;
+}
+
+.teiHeader,
+.entry-header {
+  background-color: var(--gray);
+}
+
+.entry-title {
+  color: var(--red);
+}
+
+
+
+
+.byline {
+  text-align: right;
+}
+
+b.el {
+  color:red;
+}
+
+.placeName {
+  background-color: var(--hilite);
+}
+.persName {
+  background-color: var(--hilite);
+}
+
+
+.footnotes {
+  font-family: var(--global--font-primary);
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.fncall {
+  font-family: var(--global--font-primary);
+  font-size: 75%;
+  color: var(--red) !important;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5rem;
+  text-decoration: none;
+}
+
+.fncall:hover {
+  background-color: var(--hilite);
+  color: #000000;
+}
+
+.fnbody {
+  margin-left: 2rem;
+}
+.fnmarker {
+  float: left;
+  color: var(--red) !important;
+  text-decoration: none !important;
+}

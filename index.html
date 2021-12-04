@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Correspondance Delacroix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&amp;family=Oswald:wght@300&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" id="twenty-twenty-one-style-css" href="theme/style.css?ver=1.2" media="all"/>
+    <link rel="stylesheet" id="delacroix-css" href="theme/delacroix.css" media="all"/>
+    <meta charset="UTF-8"/>
+
+  </head>
+  <body class="page-template-default page page-id-8 page-parent custom-background wp-embed-responsive is-light-theme has-background-white singular has-main-navigation">
+    <div id="page" class="site">
+      <header id="masthead" class="site-header has-title-and-tagline has-menu" role="banner">
+        <div class="site-branding">
+          <h1 class="site-title">Correspondance</h1>
+          <p class="site-description">d’Eugène Delacroix</p>
+        </div>
+        <form class="search">
+          <input name="q"/>
+        </form>
+      <img src="theme/images/delacroix-ban.jpg" class="banner"/>
+        <nav id="site-navigation" class="primary-navigation" role="navigation" aria-label="Menu principal">
+          <div class="menu-button-container">
+            <button id="primary-mobile-menu" class="button" aria-controls="primary-menu-list" aria-expanded="false">
+              <span class="dropdown-icon open">Menu <svg class="svg-icon" width="24" height="24" aria-hidden="true" role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 6H19.5V7.5H4.5V6ZM4.5 12H19.5V13.5H4.5V12ZM19.5 18H4.5V19.5H19.5V18Z" fill="currentColor"/></svg>
+              </span>
+              <span class="dropdown-icon close">Fermer <svg class="svg-icon" width="24" height="24" aria-hidden="true" role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 10.9394L5.53033 4.46973L4.46967 5.53039L10.9393 12.0001L4.46967 18.4697L5.53033 19.5304L12 13.0607L18.4697 19.5304L19.5303 18.4697L13.0607 12.0001L19.5303 5.53039L18.4697 4.46973L12 10.9394Z" fill="currentColor"/></svg>
+              </span>
+            </button>
+            <!-- #primary-mobile-menu -->
+          </div>
+          <!-- .menu-button-container -->
+          <div class="primary-menu-container">
+            <ul id="primary-menu-list" class="menu-wrapper">
+              <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-34">
+                <a class="tab">Les lettres</a>
+              </li>
+              <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-34">
+                <a class="tab">Index</a>
+              </li>
+              <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-34">
+                <a class="tab">Lab</a>
+              </li>
+              <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-34">
+                <a class="tab">À propos</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <div id="content" class="site-content">
+
+        <div id="primary" class="content-area">
+          <main id="main" class="site-main" role="main">
+
+            <article class="page type-page status-publish hentry entry">
+
+              <header class="entry-header alignwide">
+                <h1 class="entry-title">
+                  <xsl:apply-templates select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/node()"/>
+                </h1>
+                <!-- ça passe ? -->
+                <xsl:apply-templates select="tei:teiHeader"/>
+
+              </header><!-- .entry-header -->
+
+              <div class="entry-content">
+                <div class="letter">
+                  <xsl:apply-templates select="tei:text"/>
+                </div>
+                <footer class="footnotes">
+                  <xsl:apply-templates select="tei:text" mode="footnote"/>
+                </footer>
+              </div><!-- .entry-content -->
+
+            </article><!-- #post-8 -->
+          </main><!-- #main -->
+        </div>
+        <footer id="colophon" class="site-footer" role="contentinfo">
+
+
+
+
+
+          <nav aria-label="Menu secondaire" class="footer-navigation">
+            <ul class="footer-navigation-wrapper">
+              <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home"><a><span>Remerciements</span></a></li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item"><a aria-current="page"><span>Contact</span></a></li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item"><a aria-current="page"><span>Crédits</span></a></li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item"><a aria-current="page"><span>Principes de transcription</span></a></li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item"><a aria-current="page"><span>©</span></a></li>
+            </ul><!-- .footer-navigation-wrapper -->
+          </nav><!-- .footer-navigation -->
+          <div class="site-info">
+            <div class="site-name">
+              <a>Correspondance d’Eugène Delacroix</a>
+            </div><!-- .site-name -->
+            <div class="powered-by">
+              <!-- Fièrement propulsé par <a href="https://fr.wordpress.org/">WordPress</a>			</div> -->
+
+              <!-- .powered-by -->
+
+          </div><!-- .site-info -->
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
