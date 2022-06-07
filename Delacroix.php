@@ -7,6 +7,7 @@ include_once(__DIR__ . '/php/autoload.php');
 
 use Psr\Log\{LogLevel};
 use Oeuvres\Kit\{File, I18n, LoggerCli, LoggerFile, Xml};
+use Oeuvres\Odette\{OdtChain};
 
 Delacroix::init();
 class Delacroix
@@ -46,22 +47,86 @@ class Delacroix
     static public function update()
     {
         // check if we should build
-        if (file_exists(__DIR__ . '/BUILDING'));
-        else if (file_exists(__DIR__ . '/BUILD'));
+        $BUILDING = __DIR__ . '/BUILDING';
+        $BUILD = __DIR__ . '/BUILD';
+        if (file_exists($BUILDING));
+        else if (file_exists($BUILD));
         else {
             // TODO create new log with BUILDING
-            $logger = new LoggerFile(__DIR__ . '/BUILDING', LogLevel::INFO);
+            $logger = new LoggerFile($BUILDING, LogLevel::INFO);
+            Xml::setLogger($logger);
+            $old = array();
+            /*
+            foreach(array('log_errors', 'error_log') as $key) {
+                $old[$key] = ini_get($key);
+            }
+            ini_set("log_errors", TRUE);
+            ini_set('error_log', $BUILDING);
+            */
             try {
                 $logger->info(I18n::_('title'));
                 self::build($logger);
             }
             finally {
-                rename(__DIR__ . '/BUILDING', __DIR__ . '/BUILD');
+                rename(__DIR__ . '/BUILDING', __DIR__ . '/LOG');
+                // rename(__DIR__ . '/BUILDING', __DIR__ . '/BUILD');
+                // restore ini
+                foreach($old as $key => $value) {
+                    ini_set($key, $value);
+                }
             }
         }
         
     }
     static public function build($logger, $force=false)
+    {
+        self::lettres($logger, $force=false);
+        self::articles($logger, $force=false);
+    }
+
+    /**
+     * Loop on odt articles
+     */
+    static public function articles($logger, $force=false)
+    {
+        $odt_dir = __DIR__ . '/odt/';
+        $dst_dir = __DIR__ . '/articles/';
+        // nettoyer les restes
+        do {
+            if (!is_dir($dst_dir)) break;
+            $dh = opendir($dst_dir);
+            if (!$dh) break;
+            $n = 0;
+            while (($basename = readdir($dh)) !== false) {
+                if (++$n >= 100) break; // infinite loop ?
+                $file = $dst_dir . $basename;
+                if (is_dir($file)) continue;
+                if ($basename[0] == '.' || $basename[0] == '_') continue;
+                if (!preg_match('@\.(xml|html)@', $basename)) continue;
+                $name = pathinfo($basename, PATHINFO_FILENAME);
+                $odt_file = $odt_dir . $name . '.odt';
+                if (!file_exists($odt_file)) unlink($dst_dir . $basename);
+            }
+            closedir($dh);
+        } while(false);
+
+        // if (fil)
+        
+
+        foreach (glob($odt_dir . '*.odt') as $odt_file) {
+            $name = pathinfo($odt_file, PATHINFO_FILENAME);
+            $tei_file = $dst_dir . $name . '.xml';
+            // freshness ?
+            $odt = new OdtChain($odt_file);
+            $odt->save($tei_file);
+            $logger->info($odt_file . ' ->- ' . $tei_file);
+        }
+    }
+
+    /**
+     * Loop on XML files
+     */
+    static public function lettres($logger, $force=false)
     {
         // clean old lettre.html
         foreach (glob(__DIR__ . '/lettres/*.html') as $dst_file) {
@@ -72,7 +137,7 @@ class Delacroix
 
         // regenerate letter list
         $dst_dir = __DIR__ . "/lettres/";
-        mkdir($dst_dir);
+        File::mkdir($dst_dir);
         $lettres = fopen( $dst_dir . "index.html", 'w');
 
         fwrite($lettres, "<article class=\"lettres\">
@@ -108,8 +173,8 @@ class Delacroix
 </article>
 ");
         fclose($lettres);
-
     }
+
 
     static public function meta($tei_dom)
     {

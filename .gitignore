@@ -3,3 +3,8 @@ sitemap.xml
 *.db-*
 lettres/
 xml/
+.~*
+BUILD
+LOG
+articles/
+odt/

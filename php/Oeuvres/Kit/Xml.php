@@ -86,6 +86,12 @@ class Xml
             $message .= "  " . ($error->line) . ":" . ($error->column) . " \t";
             $message .= "err:" . $error->code . " — ";
             $message .= trim($error->message);
+
+            $trace = debug_backtrace();
+            for ($i = 0, $count = count($trace); $i < $count; $i++) {
+                $message .= "\n    " . $trace[$i]['file'] . '#' . $trace[$i]['line'];
+                if ($i + 1 < $count ) $message .= ' ' . $trace[$i + 1]['function'] . '()';
+            }
             /* xslt error could be other than message
             if ($error->code == 1) { // <xsl:message>
                 self::$logger->info("<xsl:message> " . trim($error->message));
