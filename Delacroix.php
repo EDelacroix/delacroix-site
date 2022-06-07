@@ -71,7 +71,10 @@ class Delacroix
         $xsl_file = __DIR__ . '/theme/elicom_html.xsl'; // test freshness
 
         // regenerate letter list
-        $lettres = fopen(__DIR__ . "/lettres/index.html", 'w');
+        $dst_dir = __DIR__ . "/lettres/";
+        mkdir($dst_dir);
+        $lettres = fopen( $dst_dir . "index.html", 'w');
+
         fwrite($lettres, "<article class=\"lettres\">
     <h1>Liste des lettres</h1>
     <nav class=\"lettres\">
@@ -79,7 +82,7 @@ class Delacroix
         // loop on xml files
         foreach (glob(__DIR__ . '/xml/*.xml') as $tei_file) {
             $name = pathinfo($tei_file, PATHINFO_FILENAME);
-            $dst_file = __DIR__ . '/lettres/' . $name . '.html';
+            $dst_file = $dst_dir . $name . '.html';
             $todo = false;
             // temp before database, load dom here to get meta
             $tei_dom = Xml::load($tei_file);
