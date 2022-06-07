@@ -6,123 +6,161 @@
 include_once(__DIR__ . '/php/autoload.php');
 
 use Psr\Log\{LogLevel};
-use Oeuvres\Kit\{File, LoggerCli, Xml};
+use Oeuvres\Kit\{File, I18n, LoggerCli, LoggerFile, Xml};
 
 Delacroix::init();
 class Delacroix
 {
     /** Needed extensions for this app */
     static $extensions = array('pdo_sqlite', 'xsl');
+    /**
+     * Initialize static fields, check some things
+     */
     static public function init()
     {
-        // test needed extension
+        mb_internal_encoding("UTF-8");
+        // for debug on install
+        // self::deps('mbstring', 'pdo_sqlite', 'xsl');
+    }
+
+    /**
+     * Test needed extensions
+     */
+    function deps(...$extensions) {
+        // test needed extension, should be only neede
         $mess = array();
-        foreach (self::$extensions as $ext) {
+        foreach ($extensions as $ext) {
             if (!extension_loaded($ext)) {
                 $mess[] = "<h1>Installation problem, check your php.ini, needed extension: <b>" . $ext . "</b></h1>";
             }
         }
         if (count($mess) > 0) {
             throw new Exception(implode("\n", $mess));
+            exit();
         }
-        mb_internal_encoding("UTF-8");
+    }
+
+    /**
+     * Test if content should be updated
+     */
+    static public function update()
+    {
+        // check if we should build
+        if (file_exists(__DIR__ . '/BUILDING'));
+        else if (file_exists(__DIR__ . '/BUILD'));
+        else {
+            // TODO create new log with BUILDING
+            $logger = new LoggerFile(__DIR__ . '/BUILDING', LogLevel::INFO);
+            try {
+                $logger->info(I18n::_('title'));
+                self::build($logger);
+            }
+            finally {
+                rename(__DIR__ . '/BUILDING', __DIR__ . '/BUILD');
+            }
+        }
+        
+    }
+    static public function build($logger, $force=false)
+    {
+        // clean old lettre.html
+        foreach (glob(__DIR__ . '/lettres/*.html') as $dst_file) {
+            $tei_file = __DIR__ . '/xml/' . pathinfo($dst_file, PATHINFO_FILENAME) . '.xml';
+            if (!file_exists($tei_file)) unlink($dst_file);
+        }
+        $xsl_file = __DIR__ . '/theme/elicom_html.xsl'; // test freshness
+
+        // regenerate letter list
+        $lettres = fopen(__DIR__ . "/lettres/index.html", 'w');
+        fwrite($lettres, "<article class=\"lettres\">
+    <h1>Liste des lettres</h1>
+    <nav class=\"lettres\">
+");
+        // loop on xml files
+        foreach (glob(__DIR__ . '/xml/*.xml') as $tei_file) {
+            $name = pathinfo($tei_file, PATHINFO_FILENAME);
+            $dst_file = __DIR__ . '/lettres/' . $name . '.html';
+            $todo = false;
+            // temp before database, load dom here to get meta
+            $tei_dom = Xml::load($tei_file);
+            $meta = self::meta($tei_dom);
+            $html = "<a href=\"" . $name . "\">";
+            if (isset($meta['date'])) $html .= $meta['date'] . ', ';
+            if (isset($meta['sender'])) $html .= 'de ' . $meta['sender'];
+            if (isset($meta['receiver'])) $html .= ', à ' . $meta['receiver'];
+            $html .= "</a>\n";
+            fwrite($lettres, $html);
+
+            // tester date
+            if (!file_exists($dst_file)) $todo=true;
+            else if (filemtime($dst_file) < filemtime($tei_file)) $todo = true;
+            else if (filemtime($dst_file) < filemtime($xsl_file)) $todo = true;
+            if (!$force && !$todo) continue;
+            self::elicom_html($tei_dom, $dst_file);
+            $logger->info($tei_file . ' ->- ' . $dst_file);
+
+        }
+        fwrite($lettres, "
+    </nav>
+</article>
+");
+        fclose($lettres);
+
+    }
+
+    static public function meta($tei_dom)
+    {
+        // return meta
+        $meta = array();
+        $xpath = new DOMXpath($tei_dom);
+        $xpath->registerNamespace('tei', "http://www.tei-c.org/ns/1.0");
+
+        $nl = $xpath->query("//tei:correspAction[@type='sent']/tei:persName");
+        foreach ($nl as $node) {
+            $value = $node->getAttribute('key');
+            if (!$value) break;
+            list($value) = explode("(", $value);
+            $meta['sender'] = trim($value);
+            break;
+        }
+        $nl = $xpath->query("//tei:correspAction[@type='sent']/tei:date");
+        foreach ($nl as $node) {
+            $value = $node->getAttribute('when');
+            if (!$value) break;
+            $meta['date'] = $value;
+            break;
+        }
+        $nl = $xpath->query("//tei:correspAction[@type='received']/tei:persName");
+        foreach ($nl as $node) {
+            $value = $node->getAttribute('key');
+            if (!$value) break;
+            list($value) = explode("(", $value);
+            $meta['receiver'] = trim($value);
+            break;
+        }
+        return $meta;
+ 
     }
 
     /**
      * Transfrom one letter
      */
-    static public function elicom_html($tei_file)
+    static public function elicom_html($tei_dom, $dst_file)
     {
-        // CLI, remember to set a logger Xml::setLogger()
-        $tei_dom = Xml::load($tei_file);
         $xsl_file = __DIR__ . '/theme/elicom_html.xsl';
-        $dst_dir = __DIR__ . '/lettres/';
-        $dst_file = $dst_dir . pathinfo($tei_file, PATHINFO_FILENAME) . '.html';
         Xml::transformToUri(
             $xsl_file,
             $tei_dom,
             $dst_file
         );
-    }
 
-    public static function readme()
-    {
-        include(dirname(dirname(__FILE__)) . '/teinte/teidoc.php');
-        $readme = "
-# Delacroix, des lettres
+   }
 
-Liens vers les fichiers XML/TEI. En cliquant, un texte devrait vous apparaître 
-sans balises et proprement mis en page, avec une transformatoin XSLT à la volée
-qui se fait dans le navigateur.
-
-| De   | À    | Date | XML/TEI |
-| :--- | :--- | ---: | ------: | 
-";
-        $glob = dirname(__FILE__) . "/*.xml";
-        $i = 1;
-        $dom = new DOMDocument();
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
-        $dom->substituteEntities = true;
-
-        foreach (glob($glob) as $srcfile) {
-            $name = pathinfo($srcfile,  PATHINFO_FILENAME);
-
-            $dom->load($srcfile, LIBXML_NOENT | LIBXML_NONET | LIBXML_NSCLEAN | LIBXML_NOCDATA | LIBXML_NOWARNING);
-            $xpath = new DOMXpath($dom);
-            $xpath->registerNamespace('tei', "http://www.tei-c.org/ns/1.0");
-            $de = "???";
-            $nl = $xpath->query("//tei:correspAction[@type='sent']/tei:persName");
-            foreach ($nl as $node) {
-                $value = $node->getAttribute('key');
-                if (!$value) break;
-                list($value) = explode("(", $value);
-                $de = trim($value);
-                break;
-            }
-            $date = "???";
-            $nl = $xpath->query("//tei:correspAction[@type='sent']/tei:date");
-            foreach ($nl as $node) {
-                $value = $node->getAttribute('when');
-                if (!$value) break;
-                $date = $value;
-                break;
-            }
-            $a = "???";
-            $nl = $xpath->query("//tei:correspAction[@type='received']/tei:persName");
-            foreach ($nl as $node) {
-                $value = $node->getAttribute('key');
-                if (!$value) break;
-                list($value) = explode("(", $value);
-                $a = trim($value);
-                break;
-            }
-
-            // $readme .= "|$i.";
-            $readme .= "|$de";
-            $readme .= "|$a";
-            $readme .= "|$date";
-            $readme .= "|$name";
-            $readme .= "|\n";
-            $i++;
-        }
-        return $readme;
-    }
-
-    static public function build()
+    static public function cli()
     {
         global $argv;
-        $count = count($argv); 
-        if ($count < 2) exit("
-php build.php \"../delacroix-xml/*.xml\"
-cf. https://github.com/EDelacroix/xml
-"       );
         $logger = new LoggerCli(LogLevel::INFO);
         Xml::setLogger($logger);
-        $glob = $argv[1];
-        foreach (glob($glob) as $tei_file) {
-            // tester date ?
-            self::elicom_html($tei_file);
-        }
+        self::build($logger);
     }
 }

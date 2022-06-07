@@ -6,8 +6,12 @@
     RewriteEngine On
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     # RewriteBase / # was needed for old apache
-    RewriteRule ^index\.php$ - [L] # direct index.php access, [L] = last
-    RewriteCond %{REQUEST_FILENAME} !-f # file exists, no redirection
-    RewriteCond %{REQUEST_FILENAME} !-d # directory exists, no redirection
-    RewriteRule (.*) index.php [QSA,L]  # let the rooter work
+    # direct index.php access, [L] = last
+    RewriteRule ^index\.php$ - [L] 
+    # file exists, no redirection
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # directory exists, no redirection
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # let the rooter work
+    RewriteRule (.*) index.php [QSA,L]
 </IfModule>

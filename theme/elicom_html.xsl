@@ -3,13 +3,29 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns="http://www.w3.org/1999/xhtml" 
   xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="tei">
-  <xsl:output encoding="UTF-8" indent="yes" media-type="text/html" method="xml"/>
+  <xsl:output encoding="UTF-8" indent="yes" media-type="text/html" method="xml" omit-xml-declaration="yes"/>
 
   
+  <xsl:template match="tei:TEI">
+    <article class="elicom letter">
+      
+      <header>
+        <h1>
+          <xsl:apply-templates select="/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/node()"/>
+        </h1>
+        <xsl:apply-templates select="tei:teiHeader"/>
+      </header>
+      <div class="text">
+        <xsl:apply-templates select="tei:text"/>
+      </div>
+      <footer class="footnotes">
+        <xsl:apply-templates select="tei:text" mode="footnote"/>
+      </footer>
+    </article>
+  </xsl:template>
 
   <xsl:template match="
-      tei:TEI
-    | tei:text
+      tei:text
     | tei:body
     ">
     <xsl:apply-templates/>
