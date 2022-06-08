@@ -5,6 +5,7 @@
     --hilite: #dca497;
     --red: #b83919;
     --gray: #f5ebea;
+    /* 245, 235, 234 */
     --serif: 'Bodoni Moda', 'Old Standard TT', serif;
     --sans: sans-serif;
     --responsive--aligndefault-width: 80ex;
@@ -73,12 +74,18 @@ h1 {
     font-family: var(--serif);
 }
 
-#header h1 {
+#header .title {
+    display: inline-block;
+    text-decoration: none;
     font-weight: normal;
     font-size: 2rem;
     margin: 0;
-    padding: 1rem 0 1rem 2rem;
+    padding: 1rem 1rem 1rem 2rem;
     line-height: 105%;
+}
+
+#header a.title:hover {
+    background-color: rgba(245, 235, 234, 0.1);
 }
 
 #header img {
@@ -120,7 +127,7 @@ nav.lettres a:hover,
     color: var(--dark);
 }
 
-#body {
+#content {
     background-color: var(--gray);
     padding: 1rem 0 1rem 0;
 }
@@ -128,12 +135,86 @@ nav.lettres a:hover,
 
 /* page statique */
 
-body.lettres #body>article,
-body.pages #body>article,
-#body>article.lettres {
+body.lettres #content>.content,
+body.pages #content>.content,
+#content article.lettres {
     max-width: 80ex;
     margin-left: auto;
     margin-right: auto;
+}
+
+body.articles #content>.content {
+    position: relative;
+    max-width: 120ex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+article.teinte {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+article.teinte .main {
+    position: relative;
+}
+
+article.teinte aside.toc {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    flex-basis: 30ex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    order: -1;
+}
+
+aside.toc {
+    padding-top: 2rem;
+    font-family: var(--sans);
+}
+
+aside.toc nav a {
+    display: block;
+    padding: 0.5rem;
+    line-height: 105%;
+}
+
+aside.toc nav>ol,
+aside.toc nav>ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#notebox {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-height: 20vh;
+    overflow-y: auto;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    z-index: 20;
+    background: var(--gray);
+    padding: 0.7rem 1rem 0.2rem 1rem;
+    visibility: hidden;
+    border-top: 1px var(--bg) solid;
+    box-shadow: 0px -5px 5px var(--gray);
+}
+
+#notebox a.noteback {
+    position: static;
+    display: inline;
+    margin: 0;
+}
+
+article.teinte figure {
+    font-family: var(--sans);
 }
 
 nav.lettres .singular .entry-header {

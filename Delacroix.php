@@ -68,8 +68,7 @@ class Delacroix
                 self::build($logger);
             }
             finally {
-                rename(__DIR__ . '/BUILDING', __DIR__ . '/LOG');
-                // rename(__DIR__ . '/BUILDING', __DIR__ . '/BUILD');
+                rename(__DIR__ . '/BUILDING', __DIR__ . '/BUILD');
                 // restore ini
                 foreach($old as $key => $value) {
                     ini_set($key, $value);
@@ -116,10 +115,18 @@ class Delacroix
         foreach (glob($odt_dir . '*.odt') as $odt_file) {
             $name = pathinfo($odt_file, PATHINFO_FILENAME);
             $tei_file = $dst_dir . $name . '.xml';
+            $html_file = $dst_dir . $name . '.html';
             // freshness ?
             $odt = new OdtChain($odt_file);
             $odt->save($tei_file);
-            $logger->info($odt_file . ' ->- ' . $tei_file);
+            $tei_dom = Xml::load($tei_file);
+            $xsl_file = __DIR__ . '/php/Oeuvres/Teinte/tei_html_article.xsl';
+            Xml::transformToUri(
+                $xsl_file,
+                $tei_dom,
+                $html_file
+            );
+            $logger->info($odt_file . ' ->- ' . $html_file);
         }
     }
 

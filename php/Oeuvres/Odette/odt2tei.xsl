@@ -295,11 +295,13 @@ la sortie en la traitant avec d'autres filtres (expressions régulières, XSLT).
 case encountered, seems logic, but not fully tested         
       <xsl:if test="$style//@fo:break-before='page' or key('style',$styleName )//@fo:break-before='page' or $style//@style:master-page-name or  key('style',$styleName )//@style:master-page-name"><pb/></xsl:if>
       -->
-      <!-- catch page break -->
+      <!-- catch page break ? -->
+      <!--
       <xsl:if test="$style/style:paragraph-properties/@fo:break-before='page'">
         <xsl:value-of select="$lf"/>
         <pb type="break-before"/>
       </xsl:if>
+      -->
       
       <xsl:value-of select="$lf"/>
       <head>

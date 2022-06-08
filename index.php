@@ -23,7 +23,8 @@ Delacroix::update();
 // welcome page
 Route::get('/', $home_dir . 'lettres/index.html');
 Route::get('/liste', $home_dir . 'lettres/index.html');
-// transformation Odette pour document odt
+// article, source odt transformé par Odette et Teinte
+Route::get('/articles/(.*)', $home_dir . 'articles/$1.html'); 
 
 
 // try if a php content is available
