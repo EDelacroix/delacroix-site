@@ -31,11 +31,11 @@ class Route {
     /** Default php template */
     private static $templates = array();
     /** An html file to include as main */
-    static $main_inc;
+    private static $main_inc;
     /** A file to include */
     static $main_contents;
     /** Path relative to the root app */
-    static $url_request;
+    public static $url_request;
     /** Split of url parts */
     static $url_parts;
     /** The resource to deliver */

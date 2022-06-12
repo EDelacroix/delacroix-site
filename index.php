@@ -15,7 +15,7 @@ use Oeuvres\Kit\{Route,I18n};
 // Titre par défaut des pages
 I18n::put('title', 'Correspondance Delacroix');
 // register the template in which include content
-Route::template($home_dir . 'tmpl_accueil.php');
+Route::template($home_dir . 'template.php');
 
 // avant de servir des lettres s’assurer que c’est à jour
 Delacroix::update();

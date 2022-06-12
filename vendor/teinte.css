@@ -84,7 +84,7 @@ div.note,
 aside.note,
 div.stage {
     text-align: justify;
-    text-justify: inter-character;
+    /* text-justify: inter-character; */
     hyphens: auto;
 }
 
@@ -138,12 +138,9 @@ b.mark:target {
 article a {
     background-color: transparent;
     text-decoration: none;
-    color: #339;
 }
 
 article a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: #000;
     border-color: inherit;
     text-decoration: none;
 }
@@ -187,12 +184,15 @@ aside header {
 }
 
 blockquote.quote {
-    margin: 0 0 0 0.5rem;
-    padding: 0.4rem 0rem 0.6rem 1rem;
+    margin: 0 0 0 0em;
+    padding: 0.8em 0em 1em 1em;
     line-height: 1.2;
-    color: rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
     border-left: 0.5rem solid rgba(128, 128, 128, 0.1);
     font-size: 1.2rem;
+    font-weight: 350;
+    word-spacing: normal;
+    letter-spacing: normal;
 }
 
 blockquote.quote .p {}
@@ -392,11 +392,12 @@ h1 a:hover {
 
 h2 {
     clear: both;
+    text-align: left;
+    font-weight: bold;
     font-size: 130%;
     margin: 1rem 0 1rem 0;
     padding-top: 1rem;
     line-height: 1.5;
-    text-align: center;
 }
 
 h3 {
@@ -1401,11 +1402,12 @@ p.note {
 }
 
 a.noteref {
+    padding-left: 0.5ex;
     font-size: 60%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
-    top: -0.4em;
+    top: -0.7em;
 }
 
 a.noteref sup {
@@ -1414,7 +1416,6 @@ a.noteref sup {
 
 a.noteref,
 a.noteback {
-    font-family: sans-serif;
     text-decoration: none;
     border-bottom: none;
     font-style: normal;
@@ -1723,7 +1724,6 @@ i .title,
 li.witness {
     list-style: square;
     font-size: 90%;
-    font-family: sans-serif;
 }
 
 .witness label,
@@ -1732,7 +1732,6 @@ i.wit,
 a.msDesc {
     font-style: italic;
     color: inherit;
-    font-family: serif;
 }
 
 
@@ -2299,7 +2298,6 @@ tfoot {
 table.data,
 table.table,
 table.search {
-    font-family: sans-serif;
     border: 1px solid;
     border-color: #CCCCCC;
     margin-top: 1rem;
@@ -2516,7 +2514,6 @@ dd.code {
 
 .pre .text {
     background: #EEF;
-    font-family: serif;
     color: #000;
 }
 
@@ -2615,7 +2612,6 @@ dl.xml dt {
     }
     .speaker,
     .stage {
-        font-family: sans-serif;
         text-align: center;
     }
     .stage {

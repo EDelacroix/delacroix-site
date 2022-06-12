@@ -6,26 +6,28 @@ require_once(__DIR__ . "/Delacroix.php");
 use Oeuvres\Kit\{I18n, Route, Web};
 
 // calculate a body class with source
-$folder = basename(dirname(Route::$resource));
+if ( Route::$url_request == '/') $folder = 'home';
+else $folder = basename(dirname(Route::$resource));
 
-?><!doctype html>
+?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8"/>
         <title><?= Route::title(I18n::_('title')) ?></title>
-        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&amp;family=Oswald:wght@300&amp;display=swap" rel="stylesheet"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital@1&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="<?= Route::home_href() ?>vendor/teinte.css"/>
         <link rel="stylesheet" href="<?= Route::home_href() ?>theme/delacroix.css"/>
     </head>
     <body class="<?= $folder ?>">
         <div id="page">
             <header id="header">
-                <a class="title" href="<?= Route::home_href() ?>">
+                <a class="home" href="<?= Route::home_href() ?>">
                     <em>Correspondance</em>
                     <br/><span>d’Eugène Delacroix</span>
                 </a>
-                <img src="<?= Route::home_href() ?>theme/images/delacroix-ban.jpg" class="banner"/>
-                <nav>
+                <nav class="tabs">
                     <?= Route::tab('liste', 'Les Lettres') ?>
                     <?= Route::tab('noms', 'Index') ?>
                     <?= Route::tab('apropos', 'À propos') ?>

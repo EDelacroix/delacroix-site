@@ -51,9 +51,7 @@ XSLT 1.0, compatible browser, PHP, Python, Java…
         </nav>
       </aside>
       <div class="main">
-        <xsl:apply-templates select="*">
-          <xsl:with-param name="level" select="$level +1"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="*"/>
         <!-- groupes de textes, procéder les notes par textes -->
         <xsl:if test="not(tei:group)">
           <!-- No notes in teiHeader ? -->
