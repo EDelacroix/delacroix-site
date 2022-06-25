@@ -4,7 +4,8 @@ sitemap.xml
 lettres/
 xml/
 .~*
+~$*
 BUILD
 LOG
 articles/
-odt/
+/_*.php

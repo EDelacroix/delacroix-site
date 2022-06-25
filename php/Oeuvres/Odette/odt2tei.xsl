@@ -61,11 +61,11 @@ la sortie en la traitant avec d'autres filtres (expressions régulières, XSLT).
   xmlns:math="http://www.w3.org/1998/Math/MathML"
   xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0"
   xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0"
+  xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2"
+  xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
   xmlns:ooo="http://openoffice.org/2004/office"
   xmlns:oooc="http://openoffice.org/2004/calc"
   xmlns:ooow="http://openoffice.org/2004/writer"
-  xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2"
-  xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
   xmlns:rdfa="http://docs.oasis-open.org/opendocument/meta/rdfa#"
   xmlns:rpt="http://openoffice.org/2005/report"
   xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0"
@@ -104,8 +104,6 @@ la sortie en la traitant avec d'autres filtres (expressions régulières, XSLT).
   <!-- Nécessaire pour libxml, assure encodage -->
   <xsl:output encoding="UTF-8" indent="yes" method="xml"/>
   <!-- clé sur les styles -->
-  <xsl:key match="style:style|text:list-style" name="style" use="@style:name"/>
-  <xsl:key match="office:automatic-styles/style:style|office:automatic-styles/text:list-style" name="style-auto" use="@style:name"/>
   <xsl:key match="text:list-style" name="list-style" use="@style:name"/>
   <xsl:key match="odette:style[@level='p']" name="p-style" use="@name"/>
   <xsl:key match="odette:style[@level='c']" name="c-style" use="@name"/>

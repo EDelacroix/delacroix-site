@@ -79,6 +79,7 @@ class Delacroix
     }
     static public function build($logger, $force=false)
     {
+        Xml::setLogger($logger);
         self::lettres($logger, $force=false);
         self::articles($logger, $force=false);
     }
@@ -109,15 +110,19 @@ class Delacroix
             closedir($dh);
         } while(false);
 
-        // if (fil)
-        
 
         foreach (glob($odt_dir . '*.odt') as $odt_file) {
             $name = pathinfo($odt_file, PATHINFO_FILENAME);
+            // if (preg_match('@^[.-_~]@', $name)) continue;
+            // freshness ?
+            try {
+                $odt = new OdtChain($odt_file);
+            } catch (Exception $e) {
+                // shall we log something here ?
+                continue;
+            }
             $tei_file = $dst_dir . $name . '.xml';
             $html_file = $dst_dir . $name . '.html';
-            // freshness ?
-            $odt = new OdtChain($odt_file);
             $odt->save($tei_file);
             $tei_dom = Xml::load($tei_file);
             $xsl_file = __DIR__ . '/php/Oeuvres/Teinte/tei_html_article.xsl';
@@ -235,7 +240,6 @@ class Delacroix
     {
         global $argv;
         $logger = new LoggerCli(LogLevel::INFO);
-        Xml::setLogger($logger);
         self::build($logger);
     }
 }

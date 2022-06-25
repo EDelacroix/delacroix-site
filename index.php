@@ -17,9 +17,6 @@ I18n::put('title', 'Correspondance Delacroix');
 // register the template in which include content
 Route::template($home_dir . 'template.php');
 
-// avant de servir des lettres s’assurer que c’est à jour
-Delacroix::update();
-
 // welcome page
 Route::get('/', $home_dir . 'lettres/index.html');
 Route::get('/liste', $home_dir . 'lettres/index.html');
