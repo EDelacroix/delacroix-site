@@ -2,6 +2,14 @@
 
 # binary files that git must not modified
 *.db binary
+*.docx binary
+*.jpeg binary
+*.jpg binary
+*.odt binary
+*.otf binary
 *.pdf binary
 *.png binary
-*.jpg binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
