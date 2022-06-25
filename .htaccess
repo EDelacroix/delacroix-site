@@ -2,6 +2,10 @@
     # content negogiations do strange things with /myfile > /myfile.php
     Options -MultiViews
 </IfModule>
+# ad cache time for fonts
+<filesMatch ".(otf|ttf)$">
+    Header set Cache-Control "max-age=15552000, public"
+</filesMatch>
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

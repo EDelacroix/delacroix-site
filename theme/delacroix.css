@@ -17,7 +17,7 @@
     font-display: swap;
     font-weight: 125 950;
     font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url(fonts/NotoSerifDisplay-VariableFont_wdth\,wght.ttf);
+    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSerifDisplay-VariableFont_wdth,wght.ttf");
 }
 
 @font-face {
@@ -26,7 +26,7 @@
     font-display: swap;
     font-weight: 125 950;
     font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url(fonts/NotoSerifDisplay-Italic-VariableFont_wdth\,wght.ttf);
+    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSerifDisplay-Italic-VariableFont_wdth,wght.ttf");
 }
 
 @font-face {
@@ -35,7 +35,7 @@
     font-display: swap;
     font-weight: 125 950;
     font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url(fonts/NotoSansDisplay-VariableFont_wdth\,wght.ttf)
+    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSansDisplay-VariableFont_wdth,wght.ttf")
 }
 
 @font-face {
@@ -44,7 +44,7 @@
     font-display: swap;
     font-weight: 125 950;
     font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url(fonts/NotoSansDisplay-Italic-VariableFont_wdth\,wght.ttf);
+    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSansDisplay-Italic-VariableFont_wdth,wght.ttf");
 }
 
 html {

@@ -14,9 +14,6 @@ else $folder = basename(dirname(Route::$resource));
     <head>
         <meta charset="utf-8"/>
         <title><?= Route::title(I18n::_('title')) ?></title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital@1&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="<?= Route::home_href() ?>vendor/teinte.css"/>
         <link rel="stylesheet" href="<?= Route::home_href() ?>theme/delacroix.css"/>
     </head>
