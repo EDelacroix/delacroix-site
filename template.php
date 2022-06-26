@@ -21,7 +21,7 @@ else $folder = basename(dirname(Route::$resource));
         <div id="page">
             <img alt="Correspondance d’Eugène Delacroix" src="<?= Route::home_href  () ?>theme/delacroix_banniere.png"/>
             <header id="header">
-                <a class="home" href="<?= Route::home_href() ?>">
+                <a class="home" href="<?= Route::home_href() ?>/.">
                     <em>Correspondance</em>
                     <br/><span>d’Eugène Delacroix</span>
                 </a>
