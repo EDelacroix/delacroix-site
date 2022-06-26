@@ -155,26 +155,29 @@ class Delacroix
         }
         $xsl_file = __DIR__ . '/theme/elicom_html.xsl'; // test freshness
         $dst_dir = __DIR__ . "/lettres/";
+        $dst_index = __DIR__ . "/lettres/index.html";
 
         // test if a new list should be generated
-        $stop = true;
+        $done = true;
         foreach (glob(__DIR__ . '/xml/*.xml') as $tei_file) {
             $name = pathinfo($tei_file, PATHINFO_FILENAME);
             $dst_file = $dst_dir . $name . '.html';
             // tester date
-            if (!file_exists($dst_file)
+            if ( !file_exists($dst_index)
+                || !file_exists($dst_file)
+                || filemtime($dst_file) < filemtime($dst_index)
                 || filemtime($dst_file) < filemtime($tei_file)
                 || filemtime($dst_file) < filemtime($xsl_file)
             ) {
-                $stop = false;
+                $done = false;
                 break;
             }
         }
-        if ($stop) return;
+        if ($done) return;
 
         // regenerate letter list
         File::mkdir($dst_dir);
-        $lettres = fopen( $dst_dir . "index.html", 'w');
+        $lettres = fopen( $dst_index, 'w');
 
         fwrite($lettres, "<article class=\"lettres\">
     <h1>Liste des lettres</h1>

@@ -18,7 +18,7 @@ I18n::put('title', 'Correspondance Delacroix');
 Route::template($home_dir . 'template.php');
 
 // welcome page
-Route::get('/', $home_dir . 'lettres/index.html');
+Route::get('/', $home_dir . 'articles/accueil.html');
 Route::get('/liste', $home_dir . 'lettres/index.html');
 // article, source odt transformé par Odette et Teinte
 Route::get('/articles/(.*)', $home_dir . 'articles/$1.html'); 
