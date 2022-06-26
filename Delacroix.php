@@ -113,16 +113,24 @@ class Delacroix
 
         foreach (glob($odt_dir . '*.odt') as $odt_file) {
             $name = pathinfo($odt_file, PATHINFO_FILENAME);
-            // if (preg_match('@^[.-_~]@', $name)) continue;
+            if (preg_match('@^[.-_~]@', $name)) continue;
             // freshness ?
+            $tei_file = $dst_dir . $name . '.xml';
+            $html_file = $dst_dir . $name . '.html';
+            if (file_exists($tei_file)
+                && filemtime($tei_file) > filemtime($odt_file)
+                && file_exists($html_file)
+                && filemtime($html_file) > filemtime($odt_file)
+            ) {
+                continue;
+            }
+
             try {
                 $odt = new OdtChain($odt_file);
             } catch (Exception $e) {
                 // shall we log something here ?
                 continue;
             }
-            $tei_file = $dst_dir . $name . '.xml';
-            $html_file = $dst_dir . $name . '.html';
             $odt->save($tei_file);
             $tei_dom = Xml::load($tei_file);
             $xsl_file = __DIR__ . '/php/Oeuvres/Teinte/tei_html_article.xsl';
@@ -146,9 +154,25 @@ class Delacroix
             if (!file_exists($tei_file)) unlink($dst_file);
         }
         $xsl_file = __DIR__ . '/theme/elicom_html.xsl'; // test freshness
+        $dst_dir = __DIR__ . "/lettres/";
+
+        // test if a new list should be generated
+        $stop = true;
+        foreach (glob(__DIR__ . '/xml/*.xml') as $tei_file) {
+            $name = pathinfo($tei_file, PATHINFO_FILENAME);
+            $dst_file = $dst_dir . $name . '.html';
+            // tester date
+            if (!file_exists($dst_file)
+                || filemtime($dst_file) < filemtime($tei_file)
+                || filemtime($dst_file) < filemtime($xsl_file)
+            ) {
+                $stop = false;
+                break;
+            }
+        }
+        if ($stop) return;
 
         // regenerate letter list
-        $dst_dir = __DIR__ . "/lettres/";
         File::mkdir($dst_dir);
         $lettres = fopen( $dst_dir . "index.html", 'w');
 
