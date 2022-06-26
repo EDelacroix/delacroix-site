@@ -148,14 +148,15 @@ class Delacroix
      */
     static public function lettres($logger, $force=false)
     {
+        $dst_index = __DIR__ . "/lettres/index.html";
         // clean old lettre.html
         foreach (glob(__DIR__ . '/lettres/*.html') as $dst_file) {
+            if ($dst_file == $dst_index) continue;
             $tei_file = __DIR__ . '/xml/' . pathinfo($dst_file, PATHINFO_FILENAME) . '.xml';
             if (!file_exists($tei_file)) unlink($dst_file);
         }
         $xsl_file = __DIR__ . '/theme/elicom_html.xsl'; // test freshness
         $dst_dir = __DIR__ . "/lettres/";
-        $dst_index = __DIR__ . "/lettres/index.html";
 
         // test if a new list should be generated
         $done = true;
@@ -165,9 +166,9 @@ class Delacroix
             // tester date
             if ( !file_exists($dst_index)
                 || !file_exists($dst_file)
-                || filemtime($dst_file) < filemtime($dst_index)
-                || filemtime($dst_file) < filemtime($tei_file)
-                || filemtime($dst_file) < filemtime($xsl_file)
+                || filemtime($tei_file) > filemtime($dst_index)
+                || filemtime($tei_file) > filemtime($xsl_file)
+                || filemtime($tei_file) > filemtime($dst_file)
             ) {
                 $done = false;
                 break;
