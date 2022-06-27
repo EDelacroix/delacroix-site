@@ -106,6 +106,7 @@ h1 {
 
 h2 {
     font-weight: bold;
+    color: var(--red);
 }
 
 article.teinte figure,
@@ -257,7 +258,6 @@ aside.toc {
 
 aside.toc nav a {
     display: block;
-    text-align: right;
     color: var(--black);
     padding: 0.5rem;
     line-height: 105%;
@@ -267,11 +267,21 @@ nav a:hover {
     background-color: var(--hilite);
 }
 
-aside.toc nav>ol,
-aside.toc nav>ul {
+aside.toc ol,
+aside.toc ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+aside.toc ol ol,
+aside.toc ul ul {
+    margin-left: 1.5rem;
+}
+
+aside.toc ol ol a,
+aside.toc ul ul a {
+    text-align: right;
 }
 
 #notebox {

@@ -14,6 +14,7 @@ else $folder = basename(dirname(Route::$resource));
     <head>
         <meta charset="utf-8"/>
         <title><?= Route::title(I18n::_('title')) ?></title>
+        <link rel="manifest" href="<?= Route::home_href() ?>delacroix.webmanifest">
         <link rel="stylesheet" href="<?= Route::home_href() ?>vendor/teinte.css"/>
         <link rel="stylesheet" href="<?= Route::home_href() ?>theme/delacroix.css"/>
     </head>
@@ -21,14 +22,15 @@ else $folder = basename(dirname(Route::$resource));
         <div id="page">
             <img alt="Correspondance d’Eugène Delacroix" src="<?= Route::home_href  () ?>theme/delacroix_banniere.png"/>
             <header id="header">
-                <a class="home" href="<?= Route::home_href() ?>/.">
+                <a class="home" href="<?= Route::home_href() ?>.">
                     <em>Correspondance</em>
                     <br/><span>d’Eugène Delacroix</span>
                 </a>
                 <nav class="tabs">
-                    <?= Route::tab('liste', 'Les Lettres') ?>
+                    <?= Route::tab('liste', 'Lettres') ?>
                     <?= Route::tab('noms', 'Index') ?>
-                    <?= Route::tab('apropos', 'À propos') ?>
+                    <?= Route::tab('inventaire', 'Inventaire') ?>
+                    <?= Route::tab('presentation', 'Présentation') ?>
                 </nav>
             </header>
             <div id="content">
@@ -39,7 +41,7 @@ else $folder = basename(dirname(Route::$resource));
             </div>
             <footer id="footer">
                 <nav>
-                    <a href="remerciement">Remerciements</a>
+                    <a href="remerciements">Remerciements</a>
                     <a href="contact">Contact</a>
                     <a href="credits">Crédits</a>
                     <a href="transcription">Principes de transcription</a>

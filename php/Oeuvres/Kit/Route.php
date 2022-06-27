@@ -33,13 +33,13 @@ class Route {
     /** An html file to include as main */
     private static $main_inc;
     /** A file to include */
-    static $main_contents;
+    private static $main_contents;
     /** Path relative to the root app */
-    public static $url_request;
+    private static $url_request;
     /** Split of url parts */
     static $url_parts;
     /** The resource to deliver */
-    static $resource;
+    private static $resource;
     /** Has a routage been done ? */
     static $routed;
 
@@ -189,6 +189,7 @@ class Route {
         }
         // file not found, let chain continue
         if (!file_exists($resource)) {
+            self::$resource = $resource;
             return false;
         }
         // modyfy parameters according to route
@@ -277,6 +278,20 @@ Use Route::template('tmpl_my.php', '$tmpl_key');"
         else {
             self::$templates[] = $tmpl_php;
         }
+    }
+    /**
+     * Return the path requested
+     */
+    static public function url_request(): string
+    {
+        return self::$url_request;
+    }
+    /**
+     * Return the last calculated path for reosource (maybe ueful for debug)
+     */
+    static public function resource(): ?string
+    {
+        return self::$resource;
     }
     /**
      * Return app_href, optional, if the index.php is outside app_dir

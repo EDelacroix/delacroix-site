@@ -23,7 +23,7 @@ window.onscroll = function() {
     const Liser = function() {
         let vh;
         let vw;
-        let noterefs;
+        let noterefs = [];
         let notebox;
 
         function init() {
@@ -144,6 +144,7 @@ window.onscroll = function() {
 
 
         function noteboxScroll() {
+            if (!noterefs || noterefs.length < 1) return;
             var up = false;
             var scrollY = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollY < Liser.lastScrollY) up = true;

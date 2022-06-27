@@ -7,5 +7,6 @@ xml/
 ~$*
 BUILD
 LOG
+html/
 articles/
 /_*.php

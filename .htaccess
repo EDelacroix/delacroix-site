@@ -13,11 +13,12 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     # RewriteBase / # was needed for old apache
     # direct index.php access, [L] = last
-    RewriteRule ^index\.php$ - [L] 
-    # file exists, no redirection
+    RewriteRule ^index\.php$ - [L]
+    # odt images 
     RewriteCond %{REQUEST_FILENAME} !-f
-    # directory exists, no redirection
+    RewriteRule ([^/]+-img/.*)  html/$1 [QSA,L]
+    # let the rooter work if not file exists
+    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    # let the rooter work
     RewriteRule (.*) index.php [QSA,L]
 </IfModule>

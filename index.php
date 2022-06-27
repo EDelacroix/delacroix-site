@@ -17,20 +17,23 @@ I18n::put('title', 'Correspondance Delacroix');
 // register the template in which include content
 Route::template($home_dir . 'template.php');
 
-// welcome page
-Route::get('/', $home_dir . 'articles/accueil.html');
+
+// une lettre
+Route::get('/(CAC_ED.*)', $home_dir . 'lettres/$1.html');
+// Accueil
+Route::get('/', $home_dir . 'html/accueil.html');
+// liste des lettres, attention, pas lettres/, ou sinon sert le dossier
 Route::get('/liste', $home_dir . 'lettres/index.html');
+// page simple (le . exlue par défaut les /)
+Route::get('/(.*)', $home_dir . 'html/$1.html');
+
 // article, source odt transformé par Odette et Teinte
-Route::get('/articles/(.*)', $home_dir . 'articles/$1.html'); 
+Route::get('/articles/(.*)', $home_dir . 'html/$1.html'); 
 
 
 // try if a php content is available
 Route::get('/(.*)', $home_dir . 'pages/$1.php'); 
-// try if an html content is available
-Route::get('/(.*)', $home_dir . 'pages/$1.html');
 
-// une lettre
-Route::get('/(CAC_ED.*)', $home_dir . 'lettres/$1.html');
 // catch all
 Route::route('/404', $home_dir . 'pages/404.html');
 // No Route has worked

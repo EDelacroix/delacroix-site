@@ -90,7 +90,7 @@ class Delacroix
     static public function articles($logger, $force=false)
     {
         $odt_dir = __DIR__ . '/odt/';
-        $dst_dir = __DIR__ . '/articles/';
+        $dst_dir = __DIR__ . '/html/';
         // nettoyer les restes
         do {
             if (!is_dir($dst_dir)) break;

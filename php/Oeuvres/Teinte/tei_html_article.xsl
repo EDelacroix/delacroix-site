@@ -20,8 +20,8 @@ XSLT 1.0, compatible browser, PHP, Python, Java…
   <xsl:import href="html/tei_toc_html.xsl"/>
   <!-- Maybe used as a body class -->
   <xsl:param name="folder"/>
-  <!--  -->
-  <xsl:output encoding="UTF-8" indent="yes" method="xml" omit-xml-declaration="yes"/>
+  <!-- method html, safer for empty <div/> -->
+  <xsl:output encoding="UTF-8" indent="yes" method="html" omit-xml-declaration="yes"/>
   <!-- Racine -->
   <xsl:template match="/">
     <xsl:apply-templates select="/*/tei:text"/>
@@ -46,9 +46,11 @@ XSLT 1.0, compatible browser, PHP, Python, Java…
         <xsl:with-param name="class" select="$class"/>
       </xsl:call-template>
       <aside class="toc">
-        <nav>
-          <xsl:call-template name="toc"/>
-        </nav>
+        <xsl:if test="count(.//tei:head) &gt; 2">
+          <nav>
+            <xsl:call-template name="toc"/>
+          </nav>
+        </xsl:if>
       </aside>
       <div class="main">
         <xsl:apply-templates select="*"/>
