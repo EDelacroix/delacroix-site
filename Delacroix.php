@@ -113,7 +113,7 @@ class Delacroix
 
         foreach (glob($odt_dir . '*.odt') as $odt_file) {
             $name = pathinfo($odt_file, PATHINFO_FILENAME);
-            if (preg_match('@^[.-_~]@', $name)) continue;
+            if (preg_match('@^[._~]@', $name)) continue;
             // freshness ?
             $tei_file = $dst_dir . $name . '.xml';
             $html_file = $dst_dir . $name . '.html';
@@ -133,6 +133,9 @@ class Delacroix
             }
             $odt->save($tei_file);
             $tei_dom = Xml::load($tei_file);
+            $tei_dom->preserveWhiteSpace = false;
+            $tei_dom->formatOutput = true; // after multiple tests, keep it
+            $tei_dom->substituteEntities = true;
             $xsl_file = __DIR__ . '/php/Oeuvres/Teinte/tei_html_article.xsl';
             Xml::transformToUri(
                 $xsl_file,

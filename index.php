@@ -30,11 +30,7 @@ Route::get('/(.*)', $home_dir . 'html/$1.html');
 // article, source odt transformé par Odette et Teinte
 Route::get('/articles/(.*)', $home_dir . 'html/$1.html'); 
 
-
-// try if a php content is available
-Route::get('/(.*)', $home_dir . 'pages/$1.php'); 
-
 // catch all
-Route::route('/404', $home_dir . 'pages/404.html');
+Route::route('/404', $home_dir . 'html/404.html');
 // No Route has worked
 echo "Bad routage, 404.";

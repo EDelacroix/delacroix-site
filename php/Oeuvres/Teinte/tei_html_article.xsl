@@ -21,7 +21,7 @@ XSLT 1.0, compatible browser, PHP, Python, Java…
   <!-- Maybe used as a body class -->
   <xsl:param name="folder"/>
   <!-- method html, safer for empty <div/> -->
-  <xsl:output encoding="UTF-8" indent="yes" method="html" omit-xml-declaration="yes"/>
+  <xsl:output encoding="UTF-8" indent="yes" method="xml" omit-xml-declaration="yes"/>
   <!-- Racine -->
   <xsl:template match="/">
     <xsl:apply-templates select="/*/tei:text"/>
@@ -51,6 +51,7 @@ XSLT 1.0, compatible browser, PHP, Python, Java…
             <xsl:call-template name="toc"/>
           </nav>
         </xsl:if>
+        <xsl:text> </xsl:text>
       </aside>
       <div class="main">
         <xsl:apply-templates select="*"/>

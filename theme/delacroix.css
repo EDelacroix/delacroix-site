@@ -61,6 +61,7 @@ html {
 #header,
 #footer,
 nav,
+.card,
 h1,
 h2,
 h3,
@@ -73,6 +74,7 @@ h6,
     word-spacing: 30%;
     font-stretch: 75%;
     font-weight: 300;
+    color: var(--black);
 }
 
 #notebox,
@@ -107,6 +109,20 @@ h1 {
 h2 {
     font-weight: bold;
     color: var(--red);
+}
+
+h3 {
+    font-weight: bold;
+    text-indent: 0;
+}
+
+h3>a {
+    display: block;
+    padding: 0 1rem;
+}
+
+h3 a:hover {
+    background-color: var(--white);
 }
 
 article.teinte figure,
@@ -166,7 +182,7 @@ article.teinte figure,
     text-decoration: none;
 }
 
-#header .home {
+#header a.home {
     display: inline-block;
     margin: 0;
     padding: 0.5rem 2rem 0.5rem 1rem;
@@ -213,6 +229,7 @@ nav.lettres a:hover,
 
 /* page statique */
 
+body.home #content>.content,
 body.lettres #content>.content,
 body.pages #content>.content,
 #content article.lettres {
@@ -407,4 +424,50 @@ b.el {
     float: left;
     color: var(--red) !important;
     text-decoration: none !important;
+}
+
+
+/* Specific welcome  */
+
+body.home aside.toc {
+    display: none;
+}
+
+ul.card {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+li.card {
+    display: block;
+    background-color: var(--white);
+    text-align: center;
+}
+
+li.card>a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: inherit;
+    padding: 1rem;
+}
+
+li.card>a:hover {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+li.card>span.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    height: 100%;
 }

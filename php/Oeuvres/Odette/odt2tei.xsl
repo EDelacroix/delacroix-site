@@ -809,6 +809,7 @@ Listes et tables
                 <xsl:attribute name="type">ol</xsl:attribute>
               </xsl:when>
             </xsl:choose>
+            <!--
             <xsl:if test="name($list-level)">
               <xsl:variable name="rend" select="$list-level/@text:bullet-char | $list-level/@style:num-format"/>
               <xsl:choose>
@@ -817,7 +818,6 @@ Listes et tables
                     <xsl:value-of select="($list-level/@text:bullet-char | $list-level/@style:num-format)"/>
                   </xsl:attribute>
                 </xsl:when>
-                <!-- bug PDF 2 DOC, à ou « utilisé comme puce -->
                 <xsl:otherwise>
                   <xsl:attribute name="rend">
                     <xsl:value-of select="($list-level/@text:bullet-char | $list-level/@style:num-format)"/>
@@ -825,7 +825,9 @@ Listes et tables
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:if>
+            -->
             <xsl:apply-templates select="*"/>
+            <xsl:value-of select="$lf"/>
           </list>
         </xsl:otherwise>
       </xsl:choose>
@@ -1176,6 +1178,7 @@ to facilitate subsequent groupings.
         <xsl:when test="$classtest = 'footnotetextchar' "/>
         <xsl:when test="$classtest = 'framecontents'"/>
         <xsl:when test="$classtest = 'hyperlink' "/>
+        <xsl:when test="$classtest = 'lienhypertexte' "/>
         <xsl:when test="$classtest = 'mwheadline' "/>
         <xsl:when test=" starts-with($classtest, 'normal') "/>
         <xsl:when test="starts-with ($classtest, 'notedebasdepage') "/>
