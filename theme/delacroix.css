@@ -60,7 +60,7 @@ html {
 
 #header,
 #footer,
-nav,
+nav.toc,
 .card,
 h1,
 h2,
@@ -209,9 +209,13 @@ nav.lettres a {
     display: block;
     text-decoration: none;
     padding: 0rem 1rem;
+    color: inherit;
 }
 
-nav.lettres a:hover,
+nav.lettres a:hover {
+    background-color: var(--white);
+}
+
 #footer nav a:hover,
 #footer nav a.selected,
 #header nav a:hover,
