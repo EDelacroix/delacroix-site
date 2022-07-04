@@ -685,7 +685,8 @@ Sections
       </xsl:if>
       -->
       <xsl:choose>
-        <xsl:when test="not(*) and contains(@rend, 'card')">
+        <!-- Styled list item may like a conainer -->
+        <xsl:when test="not(*) and @rend != ''">
           <span class="item">
             <xsl:apply-templates>
               <xsl:with-param name="from" select="$from"/>

@@ -7,7 +7,7 @@
     --hilite: rgb(220, 164, 151);
     --red: rgb(184, 57, 25);
     --bg: rgb(245, 235, 234);
-    --font-family: 'Noto Serif Display', serif;
+    --serif: 'Noto Serif Display', serif;
     --sans-serif: 'Noto Sans Display', sans-serif;
 }
 
@@ -49,19 +49,22 @@
 
 html {
     font-size: 20px;
-    font-family: var(--font-family);
-    font-variant-numeric: oldstyle-nums;
-    background-color: var(--bg);
+    font-family: var(--sans-serif);
     font-weight: 400;
     line-height: 150%;
+    font-variant-numeric: oldstyle-nums;
+    background-color: var(--bg);
+    /*
     word-spacing: 150%;
     letter-spacing: -.09ex;
+    */
 }
 
 #header,
 #footer,
 nav.toc,
 .card,
+li.letter,
 h1,
 h2,
 h3,
@@ -437,6 +440,7 @@ body.home aside.toc {
     display: none;
 }
 
+ul.letter,
 ul.card {
     list-style: none;
     display: flex;
@@ -454,24 +458,37 @@ li.card {
     text-align: center;
 }
 
-li.card>a {
+ul.letter {
+    flex-wrap: wrap;
+}
+
+li.letter {
+    display: block;
+    background-color: var(--white);
+    text-align: left;
+    flex-basis: calc(50% - 0.5rem);
+    text-align: center;
+}
+
+li.letter>*,
+li.card>* {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100%;
     color: inherit;
     padding: 1rem;
 }
 
+li.letter>* {
+    justify-content: center;
+}
+
+li.card>* {
+    justify-content: center;
+}
+
+li.letter>a:hover,
 li.card>a:hover {
     background-color: var(--dark);
     color: var(--white);
-}
-
-li.card>span.item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    height: 100%;
 }
