@@ -32,6 +32,15 @@ else $folder = basename(dirname(Route::$resource));
                     <?= Route::tab('inventaire', 'Inventaire') ?>
                     <?= Route::tab('presentation', 'Présentation') ?>
                 </nav>
+                <select id="selfont" style="right: 0; position: absolute;">
+                    <option>Police</option>
+                    <option value="serif">Serif (défaut)</option>
+                    <option value="'Noto Serif Display'">Serif (Noto, Google)</option>
+                    <option value="'Source Serif VF'">Serif (Source Serif, Adobe)</option>
+                    <option value="sans-serif">Sans (défaut)</option>
+                    <option value="'Noto Sans Display'">Sans (Noto Sans, Google)</option>
+                    <option value="'Open Sans'">Sans (Open Sans, Google)</option>
+                </select>
             </header>
             <div id="content">
                 <div class="content">
@@ -50,5 +59,6 @@ else $folder = basename(dirname(Route::$resource));
             </footer>
         </div>
         <script src="<?= Route::home_href() ?>vendor/liser.js"></script>
+        <script src="<?= Route::home_href() ?>theme/delacroix.js"></script>
     </body>
 </html>
