@@ -14,6 +14,9 @@ else $folder = basename(dirname(Route::$resource));
     <head>
         <meta charset="utf-8"/>
         <title><?= Route::title(I18n::_('title')) ?></title>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
         <link rel="manifest" href="<?= Route::home_href() ?>delacroix.webmanifest">
         <link rel="stylesheet" href="<?= Route::home_href() ?>vendor/teinte.css"/>
         <link rel="stylesheet" href="<?= Route::home_href() ?>theme/delacroix.css"/>
@@ -37,6 +40,7 @@ else $folder = basename(dirname(Route::$resource));
                     <option value="serif">Serif (défaut)</option>
                     <option value="'Noto Serif Display'">Serif (Noto, Google)</option>
                     <option value="'Source Serif VF'">Serif (Source Serif, Adobe)</option>
+                    <option value="'EB Garamond'">Serif (EB Garamond, open)</option>
                     <option value="sans-serif">Sans (défaut)</option>
                     <option value="'Noto Sans Display'">Sans (Noto Sans, Google)</option>
                     <option value="'Open Sans'">Sans (Open Sans, Google)</option>
