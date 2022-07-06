@@ -35,16 +35,6 @@ else $folder = basename(dirname(Route::$resource));
                     <?= Route::tab('inventaire', 'Inventaire') ?>
                     <?= Route::tab('presentation', 'Présentation') ?>
                 </nav>
-                <select id="selfont" style="right: 0; position: absolute;">
-                    <option>Police</option>
-                    <option value="serif">Serif (défaut)</option>
-                    <option value="'Noto Serif Display'">Serif (Noto, Google)</option>
-                    <option value="'Source Serif VF'">Serif (Source Serif, Adobe)</option>
-                    <option value="'EB Garamond'">Serif (EB Garamond, open)</option>
-                    <option value="sans-serif">Sans (défaut)</option>
-                    <option value="'Noto Sans Display'">Sans (Noto Sans, Google)</option>
-                    <option value="'Open Sans'">Sans (Open Sans, Google)</option>
-                </select>
             </header>
             <div id="content">
                 <div class="content">
@@ -54,11 +44,28 @@ else $folder = basename(dirname(Route::$resource));
             </div>
             <footer id="footer">
                 <nav>
-                    <a href="remerciements">Remerciements</a>
-                    <a href="contact">Contact</a>
-                    <a href="credits">Crédits</a>
-                    <a href="transcription">Principes de transcription</a>
-                    <a href="copyright">©</a>
+                    <a href="<?= Route::home_href() ?>remerciements">Remerciements</a>
+                    <a href="<?= Route::home_href() ?>contact">Contact</a>
+                    <a href="<?= Route::home_href() ?>credits">Crédits</a>
+                    <a href="<?= Route::home_href() ?>transcription">Principes de transcription</a>
+                    <a href="<?= Route::home_href() ?>copyright">©</a>
+                </nav>
+                <nav class="logos">
+                    <a  title="Centre André Chastel" href="http://www.centrechastel.paris-sorbonne.fr/">
+                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_chastel.png"/>
+                    </a>
+                    <a title=" ObTIC" href="https://obtic.sorbonne-universite.fr/">
+                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_obtic.svg"/>
+                    </a>
+                    <a title="Sorbonne Université" href="https://www.sorbonne-universite.fr/">
+                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_sorbonne.png"/>
+                    </a>
+                    <a title="Huma-Num" href="https://www.huma-num.fr/">
+                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_hn.png"/>
+                    </a>
+                    <a title="Nakala" href="https://nakala.fr/">
+                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_nakala.png"/>
+                    </a>
                 </nav>
             </footer>
         </div>

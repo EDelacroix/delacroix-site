@@ -7,8 +7,8 @@
     --hilite: rgb(220, 164, 151);
     --red: rgb(184, 57, 25);
     --bg: rgb(245, 235, 234);
-    --serif: 'Source Serif VF', 'Noto Serif Display', serif;
-    --sans-serif: 'Noto Sans Display', sans-serif;
+    --serif: 'Source Serif VF', serif;
+    --sans-serif: 'Open Sans', sans-serif;
 }
 
 @font-face {
@@ -43,42 +43,6 @@
     font-style: italic;
     font-stretch: normal;
     src: url('./fonts/SourceSerif4Variable-Italic.ttf.woff2') format('woff2'), url('./fonts/SourceSerif4Variable-Italic.ttf.woff') format('woff'), url('./fonts/SourceSerif4Variable-Italic.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: "Noto Sans Display";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 125 950;
-    font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSansDisplay-VariableFont_wdth,wght.ttf")
-}
-
-@font-face {
-    font-family: "Noto Sans Display";
-    font-style: italic;
-    font-display: swap;
-    font-weight: 125 950;
-    font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSansDisplay-Italic-VariableFont_wdth,wght.ttf");
-}
-
-@font-face {
-    font-family: "Noto Serif Display";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 125 950;
-    font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSerifDisplay-VariableFont_wdth,wght.ttf");
-}
-
-@font-face {
-    font-family: "Noto Serif Display";
-    font-style: italic;
-    font-display: swap;
-    font-weight: 125 950;
-    font-stretch: 50% 150%;
-    src: local("Didot"), local("Bodoni"), local("Bodoni Moda"), url("fonts/NotoSerifDisplay-Italic-VariableFont_wdth,wght.ttf");
 }
 
 html {
@@ -526,4 +490,13 @@ li.letter>a:hover,
 li.card>a:hover {
     background-color: var(--dark);
     color: var(--white);
+}
+
+.logos a {
+    height: 8vh;
+    position: relative;
+}
+
+.logos a img {
+    height: 100%;
 }
