@@ -1,8 +1,6 @@
-pars.php
 sitemap.xml
 *.db-*
 lettres/
-xml/
 .~*
 ~*
 BUILD

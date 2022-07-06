@@ -35,6 +35,7 @@
     font-style: normal;
     font-stretch: normal;
     src: url('./fonts/SourceSerif4Variable-Roman.ttf.woff2') format('woff2'), url('./fonts/SourceSerif4Variable-Roman.ttf.woff') format('woff'), url('./fonts/SourceSerif4Variable-Roman.ttf') format('truetype');
+    font-display: swap;
 }
 
 @font-face {
@@ -43,6 +44,7 @@
     font-style: italic;
     font-stretch: normal;
     src: url('./fonts/SourceSerif4Variable-Italic.ttf.woff2') format('woff2'), url('./fonts/SourceSerif4Variable-Italic.ttf.woff') format('woff'), url('./fonts/SourceSerif4Variable-Italic.ttf') format('truetype');
+    font-display: swap;
 }
 
 html {
