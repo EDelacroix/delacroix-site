@@ -51,14 +51,14 @@ else $folder = basename(dirname(Route::$resource));
                     <a href="<?= Route::home_href() ?>copyright">©</a>
                 </nav>
                 <nav class="logos">
+                    <a title="Sorbonne Université" href="https://www.sorbonne-universite.fr/">
+                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_sorbonne.png"/>
+                    </a>
                     <a  title="Centre André Chastel" href="http://www.centrechastel.paris-sorbonne.fr/">
                         <img class="logo" src="<?= Route::home_href() ?>theme/logo_chastel.png"/>
                     </a>
                     <a title=" ObTIC" href="https://obtic.sorbonne-universite.fr/">
                         <img class="logo" src="<?= Route::home_href() ?>theme/logo_obtic.svg"/>
-                    </a>
-                    <a title="Sorbonne Université" href="https://www.sorbonne-universite.fr/">
-                        <img class="logo" src="<?= Route::home_href() ?>theme/logo_sorbonne.png"/>
                     </a>
                     <a title="Huma-Num" href="https://www.huma-num.fr/">
                         <img class="logo" src="<?= Route::home_href() ?>theme/logo_hn.png"/>
