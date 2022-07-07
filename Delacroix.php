@@ -156,6 +156,7 @@ class Delacroix
         foreach (glob(__DIR__ . '/lettres/*.html') as $dst_file) {
             if ($dst_file == $dst_index) continue;
             $tei_file = __DIR__ . '/xml/' . pathinfo($dst_file, PATHINFO_FILENAME) . '.xml';
+            $logger->info($dst_file . ' del ? ' .  $tei_file . ' '. file_exists($tei_file));
             if (!file_exists($tei_file)) {
                 $logger->info('Delete ' . $dst_file);
                 unlink($dst_file);
