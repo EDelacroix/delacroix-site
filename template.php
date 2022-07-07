@@ -6,8 +6,8 @@ require_once(__DIR__ . "/Delacroix.php");
 use Oeuvres\Kit\{I18n, Route, Web};
 
 // calculate a body class with source
-if ( Route::$url_request == '/') $folder = 'home';
-else $folder = basename(dirname(Route::$resource));
+if ( Route::url_request() == '/') $folder = 'home';
+else $folder = basename(dirname(Route::resource()));
 
 ?><!DOCTYPE html>
 <html>
