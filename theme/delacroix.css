@@ -114,6 +114,10 @@ h2 {
     color: var(--red);
 }
 
+body.home h2 {
+    border-top: 1px solid;
+}
+
 h3 {
     font-weight: bold;
     text-indent: 0;
@@ -131,6 +135,15 @@ h3 a:hover {
 article.teinte figure,
 .font3 {
     font-weight: 200;
+}
+
+article a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+article a:hover {
+    background-color: var(--white);
 }
 
 #page {
@@ -362,9 +375,14 @@ nav.lettres .singular .entry-header {
     position: relative;
 }
 
+#footer {
+    background-color: var(--white);
+    color: var(--text);
+}
+
 #footer a,
 #header a {
-    color: var(--bg);
+    color: inherit;
 }
 
 .site-branding {

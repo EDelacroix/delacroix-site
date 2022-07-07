@@ -14,6 +14,10 @@ class Delacroix
 {
     /** Needed extensions for this app */
     static $extensions = array('pdo_sqlite', 'xsl');
+    /** Xl pilot */
+    static $xsl = __DIR__ . '/theme/elicom_delacroix.xsl';
+
+    
     /**
      * Initialize static fields, check some things
      */
@@ -161,7 +165,7 @@ class Delacroix
                 unlink($dst_file);
             }
         }
-        $xsl_file = __DIR__ . '/theme/elicom_html.xsl'; // test freshness
+        $logger->info(self::$xsl);
         $dst_dir = __DIR__ . "/lettres/";
 
         // test if a new list should be generated
@@ -173,7 +177,7 @@ class Delacroix
             if ( !file_exists($dst_index)
                 || !file_exists($dst_file)
                 || filemtime($tei_file) > filemtime($dst_index)
-                || filemtime($tei_file) > filemtime($xsl_file)
+                || filemtime($tei_file) < filemtime(self::$xsl)
                 || filemtime($tei_file) > filemtime($dst_file)
             ) {
                 $done = false;
@@ -208,7 +212,7 @@ class Delacroix
             // tester date
             if (!file_exists($dst_file)) $todo=true;
             else if (filemtime($dst_file) < filemtime($tei_file)) $todo = true;
-            else if (filemtime($dst_file) < filemtime($xsl_file)) $todo = true;
+            else if (filemtime($dst_file) < filemtime(self::$xsl)) $todo = true;
             if (!$force && !$todo) continue;
             self::elicom_html($tei_dom, $dst_file);
             $logger->info($tei_file . ' ->- ' . $dst_file);
@@ -261,9 +265,8 @@ class Delacroix
      */
     static public function elicom_html($tei_dom, $dst_file)
     {
-        $xsl_file = __DIR__ . '/theme/elicom_html.xsl';
         Xml::transformToUri(
-            $xsl_file,
+            self::$xsl,
             $tei_dom,
             $dst_file
         );

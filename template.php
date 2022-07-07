@@ -43,13 +43,6 @@ else $folder = basename(dirname(Route::$resource));
                 </div>
             </div>
             <footer id="footer">
-                <nav>
-                    <a href="<?= Route::home_href() ?>remerciements">Remerciements</a>
-                    <a href="<?= Route::home_href() ?>contact">Contact</a>
-                    <a href="<?= Route::home_href() ?>credits">Crédits</a>
-                    <a href="<?= Route::home_href() ?>transcription">Principes de transcription</a>
-                    <a href="<?= Route::home_href() ?>copyright">©</a>
-                </nav>
                 <nav class="logos">
                     <a title="Sorbonne Université" href="https://www.sorbonne-universite.fr/">
                         <img class="logo" src="<?= Route::home_href() ?>theme/logo_sorbonne.png"/>
