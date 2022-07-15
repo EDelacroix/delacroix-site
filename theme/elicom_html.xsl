@@ -32,8 +32,7 @@
   </xsl:template>
   <xsl:template match="tei:teiHeader">
     <div class="teiHeader">
-      <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:msIdentifier"/>
-      <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc/tei:msDesc/tei:listBibl"/>
+      <xsl:apply-templates select="tei:fileDesc/tei:sourceDesc"/>
     </div>
   </xsl:template>
   <xsl:template match="
@@ -186,17 +185,33 @@
     </div>
   </xsl:template>
   
+  
+  <xsl:template match="tei:sourceDesc">
+    <xsl:apply-templates select="*[. != '']"/>
+  </xsl:template>
+  
+  <xsl:template match="tei:msDesc">
+    <xsl:apply-templates select="*"/>
+  </xsl:template>
+  
+  <xsl:template match="tei:physDesc"/>
+  
   <xsl:template match="tei:msIdentifier">
-    <div class="{local-name()}">
-      <xsl:for-each select="*">
+    <xsl:variable name="cont">
+      <xsl:for-each select="*[. != '']">
         <xsl:apply-templates select="."/>
         <xsl:choose>
           <xsl:when test="position() = last()"/>
           <xsl:otherwise> ; </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
-      <xsl:text>.</xsl:text>
-    </div>
+    </xsl:variable>
+    <xsl:if test="$cont != ''">
+      <div class="{local-name()}">
+        <xsl:copy-of select="$cont"/>
+        <xsl:text>.</xsl:text>
+      </div>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template match="
@@ -205,6 +220,28 @@
     <span class="{local-name()}">
       <xsl:apply-templates/>
     </span>
+  </xsl:template>
+  
+  <xsl:template match="tei:listBibl">
+    <ul class="{local-name()}">
+      <xsl:apply-templates/>
+    </ul>
+  </xsl:template>
+  
+  <xsl:template match="tei:listBibl/tei:bibl">
+    <li class="{local-name()}">
+      <xsl:apply-templates/>
+    </li>
+  </xsl:template>
+
+  <xsl:template match="tei:history">
+    <ul class="{local-name()}">
+      <xsl:for-each select="*[. != '']">
+        <li class="{local-name()}">
+          <xsl:apply-templates/>
+        </li>
+      </xsl:for-each>
+    </ul>
   </xsl:template>
   
   <xsl:template match="tei:pb" name="pb">

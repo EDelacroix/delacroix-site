@@ -158,6 +158,12 @@ article a:hover {
     position: relative;
 }
 
+.letter header {
+    background-color: var(--white);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
 .letter .pb {
     position: absolute;
     right: -200px;
@@ -401,11 +407,6 @@ nav.lettres .singular .entry-header {
     width: 100%;
 }
 
-.teiHeader,
-.entry-header {
-    background-color: var(--bg);
-}
-
 .entry-title {
     color: var(--red);
 }
@@ -418,16 +419,10 @@ b.el {
     color: red;
 }
 
-.placeName {
-    background-color: var(--hilite);
-}
-
-.persName {
-    background-color: var(--hilite);
-}
-
 .footnotes {
     margin-top: 1rem;
+    background-color: var(--white);
+    padding: 0.5rem 0 0.5rem 1rem;
 }
 
 .fncall {

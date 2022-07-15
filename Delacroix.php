@@ -12,11 +12,12 @@ use Oeuvres\Odette\{OdtChain};
 Delacroix::init();
 class Delacroix
 {
-    /** Needed extensions for this app */
+    /** Needed php extensions for this app */
     static $extensions = array('pdo_sqlite', 'xsl');
-    /** Xl pilot */
+    /** xsl pilot */
     static $xsl = __DIR__ . '/theme/elicom_delacroix.xsl';
-
+    /** xsl pilot */
+    private static $xml_dir = __DIR__ . '/xml/';
     
     /**
      * Initialize static fields, check some things
@@ -159,7 +160,7 @@ class Delacroix
         // clean old lettre.html
         foreach (glob(__DIR__ . '/lettres/*.html') as $dst_file) {
             if ($dst_file == $dst_index) continue;
-            $tei_file = __DIR__ . '/xml/' . pathinfo($dst_file, PATHINFO_FILENAME) . '.xml';
+            $tei_file = self::$xml_dir . pathinfo($dst_file, PATHINFO_FILENAME) . '.xml';
             if (!file_exists($tei_file)) {
                 $logger->info('Delete ' . $dst_file);
                 unlink($dst_file);
@@ -170,7 +171,7 @@ class Delacroix
 
         // test if a new list should be generated
         $done = true;
-        foreach (glob(__DIR__ . '/xml/*.xml') as $tei_file) {
+        foreach (glob(self::$xml_dir . '*.xml') as $tei_file) {
             $name = pathinfo($tei_file, PATHINFO_FILENAME);
             $dst_file = $dst_dir . $name . '.html';
             // tester date
@@ -195,7 +196,7 @@ class Delacroix
     <nav class=\"lettres\">
 ");
         // loop on xml files
-        foreach (glob(__DIR__ . '/xml/*.xml') as $tei_file) {
+        foreach (glob(self::$xml_dir . '*.xml') as $tei_file) {
             $name = pathinfo($tei_file, PATHINFO_FILENAME);
             $dst_file = $dst_dir . $name . '.html';
             $todo = false;
@@ -214,8 +215,8 @@ class Delacroix
             else if (filemtime($dst_file) < filemtime($tei_file)) $todo = true;
             else if (filemtime($dst_file) < filemtime(self::$xsl)) $todo = true;
             if (!$force && !$todo) continue;
-            self::elicom_html($tei_dom, $dst_file);
             $logger->info($tei_file . ' ->- ' . $dst_file);
+            self::elicom_html($tei_dom, $dst_file);
 
         }
         fwrite($lettres, "
@@ -276,6 +277,7 @@ class Delacroix
     static public function cli()
     {
         global $argv;
+        self::$xml_dir = dirname(__DIR__) . '/delacroix-xml/';
         $logger = new LoggerCli(LogLevel::INFO);
         self::build($logger);
     }

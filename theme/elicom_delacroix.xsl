@@ -6,7 +6,6 @@
   <xsl:import href="elicom_html.xsl"/>
   <xsl:output encoding="UTF-8" indent="yes" media-type="text/html" method="xml" omit-xml-declaration="yes"/>
   
-  
   <xsl:template name="href">
     <xsl:param name="url" select="@target"/>
     <xsl:choose>
@@ -21,6 +20,5 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
 
 </xsl:transform>
