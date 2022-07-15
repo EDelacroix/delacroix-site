@@ -5,7 +5,7 @@
   xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="tei">
   <xsl:import href="elicom_html.xsl"/>
   <xsl:output encoding="UTF-8" indent="yes" media-type="text/html" method="xml" omit-xml-declaration="yes"/>
-  
+
   <xsl:template name="href">
     <xsl:param name="url" select="@target"/>
     <xsl:choose>

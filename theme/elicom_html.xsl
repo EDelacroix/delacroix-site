@@ -18,9 +18,14 @@
       <div class="text">
         <xsl:apply-templates select="tei:text"/>
       </div>
-      <footer class="footnotes">
+      <xsl:variable name="notes">
         <xsl:apply-templates select="tei:text" mode="footnote"/>
-      </footer>
+      </xsl:variable>
+      <xsl:if test="$notes != ''">
+        <footer class="footnotes">
+          <xsl:copy-of select="$notes"/>
+        </footer>
+      </xsl:if>
     </article>
   </xsl:template>
 
