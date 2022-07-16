@@ -80,15 +80,18 @@ h6,
     color: var(--black);
 }
 
+.pb,
+.letter header,
 #notebox,
 .noteref,
 .footnotes,
 .sans-serif {
     font-family: var(--sans-serif);
-    word-spacing: 100%;
+    /* word-spacing: 100%; */
     letter-spacing: 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 300;
+    line-height: 117%;
 }
 
 body,
@@ -159,9 +162,35 @@ article a:hover {
 }
 
 .letter header {
+    margin: 0rem 0 2.2rem 0;
+}
+
+.letter header h1 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    line-height: 170%;
+}
+
+.letter header ul {
+    margin: 0.5rem 0;
+    padding-left: 0;
+    font-size: inherit;
+}
+
+.footnotes {
+    margin-top: 1rem;
+}
+
+.footnote {
+    margin: 0.5rem 0;
+    text-align: justify;
+}
+
+.letter .text {
+    padding: 0.5rem 2rem 0.5rem 2rem;
     background-color: var(--white);
-    padding: 1rem;
-    margin-bottom: 1rem;
+    line-height: 170%;
 }
 
 .letter .pb {
@@ -248,7 +277,7 @@ nav.lettres a:hover {
 
 #content {
     background-color: var(--bg);
-    padding: 1rem 0 1rem 0;
+    padding: 2rem 0 2rem 0;
     flex-grow: 2;
 }
 
@@ -386,7 +415,7 @@ nav.lettres .singular .entry-header {
 }
 
 #footer {
-    background-color: var(--white);
+    background-color: var(--bg);
     color: var(--text);
 }
 
@@ -419,21 +448,25 @@ b.el {
     color: red;
 }
 
-.footnotes {
-    margin-top: 1rem;
-    background-color: var(--white);
-    padding: 0.5rem 0 0.5rem 1rem;
-}
-
 .fncall {
-    font-family: var(--sans);
-    font-size: 75%;
-    color: var(--red) !important;
-    line-height: 0;
+    font-family: var(--sans-serif);
+    text-indent: 0;
+    display: inline-block;
+    color: var(--red);
+    line-height: 120%;
+    font-weight: 100;
+    font-size: 85%;
+    margin-left: 0.3ex;
+    padding: 0 0.5ex;
+    vertical-align: text-top;
+    font-variant-numeric: tabular-nums;
+    /*
     position: relative;
-    vertical-align: baseline;
     top: -0.5rem;
+    */
     text-decoration: none;
+    border-radius: 50%;
+    border: 0.5px solid;
 }
 
 .fncall:hover {
@@ -518,4 +551,9 @@ li.card>a:hover {
 
 .logos a img {
     height: 100%;
+    opacity: 40%;
+}
+
+.logos a:hover img {
+    opacity: 100%;
 }
